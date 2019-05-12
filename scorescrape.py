@@ -44,7 +44,14 @@ def getFootballGames(url):
     outer=soup.find('div', attrs={'class':'rmq-1c61845d'})
     #print(outer)  
     scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
-    print(scroll_container)
+    divs=scroll_container.find_all('div')
+    #print(scroll_container)
+    #print(divs)
+    div_length=len(scroll_container.find_all('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"}))
+    print((div_length))
+    #<div style="height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"><div style="width: 100%; height: 100%; padding: 0px; border: 0px;">
+
+
 
     #outer2 = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
     #print(outer2)
