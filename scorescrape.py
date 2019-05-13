@@ -54,6 +54,14 @@ def getFootballGames(url):
 
 
 
+    a_tags=scroll_container.find_all('a')
+    for tag in a_tags:
+        try:
+            print(tag.get('href'))
+        except: 
+            print('no href for this \'a\' tag')
+
+
     #outer2 = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
     #print(outer2)
     div_container=soup.find('div', class_="jss1")
@@ -81,7 +89,7 @@ def getFootballGames(url):
     # Retrieve all of the anchor tags
     tbody = soup('div')
     #return inner
-    break
+    return None
     
 
 print(getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games'))
