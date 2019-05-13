@@ -10,6 +10,7 @@ import unittest
 import requests
 import sys as sys
 import time
+import os
 
 #path=r'C:\\Users\\Hamza\\Documents\\Football'
 #driver = webdriver.Chrome(executable_path = path)
@@ -46,7 +47,7 @@ def getFootballGames(url):
     scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
     divs=scroll_container.find_all('div')
     #print(scroll_container)
-    #print(divs)
+    print(len(divs))
     div_length=len(scroll_container.find_all('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"}))
     print((div_length))
     #<div style="height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"><div style="width: 100%; height: 100%; padding: 0px; border: 0px;">
@@ -79,14 +80,11 @@ def getFootballGames(url):
     # 'class':"ReactVirtualized__Grid__innerScrollContainer", 'role':"rowgroup", 'style':"width: auto; height: 2330px; max-width: 796px; max-height: 2330px; overflow: hidden; position: relative;"
     # Retrieve all of the anchor tags
     tbody = soup('div')
-    return inner
-    val=0
-    for tag in tbody:
-        val=val+int(tag.string)
-        
-    return val
+    #return inner
+    break
+    
 
 print(getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games'))
 
 #<div 'style':"overflow: visible; width: 0px;"
-
+#('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"})
