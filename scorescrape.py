@@ -11,6 +11,7 @@ import requests
 import sys as sys
 import time
 import os
+import re
 
 #path=r'C:\\Users\\Hamza\\Documents\\Football'
 #driver = webdriver.Chrome(executable_path = path)
@@ -41,6 +42,12 @@ def getFootballGames(url):
 
 
 
+    '''
+
+    CODE TO OBTAIN SCROLL CONTAINER + TAGS
+
+    '''
+
 
     outer=soup.find('div', attrs={'class':'rmq-1c61845d'})
     #print(outer)  
@@ -51,15 +58,59 @@ def getFootballGames(url):
     div_length=len(scroll_container.find_all('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"}))
     print((div_length))
     #<div style="height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"><div style="width: 100%; height: 100%; padding: 0px; border: 0px;">
-
-
-
     a_tags=scroll_container.find_all('a')
+
+    
+    
+
+
+    '''
+
+    TESTING PULLS FROM INDIVIDUAL GAME PAGES
+
+    '''
+
+
+
+
+    TEST_TAG = []
+
+    #a_tags=scroll_container.find_all('a')
     for tag in a_tags:
         try:
-            print(tag.get('href'))
+            link=('https://scorestream.com' + tag.get('href'))
+            print(link)
+            if len(TEST_TAG)<1:
+                TEST_TAG.append(link)
         except: 
             print('no href for this \'a\' tag')
+
+
+    URL_TEST = TEST_TAG[0]
+    driver.get(URL_TEST)
+    html=driver.page_source
+    test_soup = BeautifulSoup(html, "html.parser")
+
+    spans=test_soup.find_all('span')
+    for span in spans: 
+        if 'Boys' in span.text:
+            print(span.text)
+
+
+
+
+
+
+
+
+
+
+
+    """ 
+
+    OLD CODE 
+    
+    """
 
 
     #outer2 = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
