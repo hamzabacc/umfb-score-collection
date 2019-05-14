@@ -60,6 +60,36 @@ def getFootballGames(url):
     #<div style="height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"><div style="width: 100%; height: 100%; padding: 0px; border: 0px;">
     a_tags=scroll_container.find_all('a')
 
+
+    '''
+    TESTNG DIV RETRIEVAL INSIDE OF DIVS
+    '''
+    first_tag=a_tags[0]
+    first_div=(first_tag.find('div'))
+    inner_div=first_div.find_all('div')
+    for item in inner_div:
+        print(item)
+        print('\n------------------')
+
+
+
+    
+
+    '''
+    TESTING SPAN TAGS
+    '''
+
+    for tag in a_tags:
+        sp=tag.find_all('span')
+        text=""
+        for span in sp:
+            try:
+                text=span.text
+                if 'Boys' in text:
+                    print(text)
+            except:
+                pass
+
     
     
 
@@ -82,6 +112,17 @@ def getFootballGames(url):
             print(link)
             if len(TEST_TAG)<1:
                 TEST_TAG.append(link)
+            sp=tag.find_all('span')
+            text=""
+            for span in sp:
+                try:
+                    text=span.text
+                    if 'Boys' in text:
+                        pass
+                        #print(text)
+                except:
+                    pass
+
         except: 
             print('no href for this \'a\' tag')
 
