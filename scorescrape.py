@@ -68,10 +68,16 @@ def getFootballGames(url):
     first_div=(first_tag.find('div'))
     inner_div=first_div.find_all('div')
     for item in inner_div:
-        print(item)
+        try:
+            print(item.text)
+        except:
+            print('no text for this div tag')
         print('\n------------------')
 
 
+    print("HERE WE GO \n\n\n")
+    print(inner_div[18].text)
+    print(inner_div[20].text)
 
     
 
