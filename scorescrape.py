@@ -59,25 +59,42 @@ def getFootballGames(url):
     print((div_length))
     #<div style="height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"><div style="width: 100%; height: 100%; padding: 0px; border: 0px;">
     a_tags=scroll_container.find_all('a')
+    print(len(a_tags))
+    #sys.exit()  
 
 
     '''
     TESTNG DIV RETRIEVAL INSIDE OF DIVS
     '''
-    first_tag=a_tags[0]
-    first_div=(first_tag.find('div'))
-    inner_div=first_div.find_all('div')
-    for item in inner_div:
-        try:
-            print(item.text)
-        except:
-            print('no text for this div tag')
-        print('\n------------------')
-
+    
 
     print("HERE WE GO \n\n\n")
-    print(inner_div[18].text)
-    print(inner_div[20].text)
+    for a in a_tags:
+        first_div=(a.find('div'))
+        inner_div=first_div.find_all('div')
+        for item in inner_div:
+            try:
+                pass
+                #print(item.text)
+            except:
+                print('no text for this div tag')
+                print('\n------------------')
+        #print("HERE WE GO \n\n\n")
+        print("Final Score:")
+        print(inner_div[18].text)
+        print(inner_div[20].text)
+
+    
+    # first_tag=a_tags[0]
+    # first_div=(first_tag.find('div'))
+    # inner_div=first_div.find_all('div')
+    # for item in inner_div:
+    #     try:
+    #         #pass
+    #         print(item.text)
+    #     except:
+    #         print('no text for this div tag')
+    #     print('\n------------------')
 
     
 
