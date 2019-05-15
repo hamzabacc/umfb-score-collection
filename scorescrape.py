@@ -15,12 +15,14 @@ import re
 
 #path=r'C:\\Users\\Hamza\\Documents\\Football'
 #driver = webdriver.Chrome(executable_path = path)
+path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+driver = webdriver.Chrome(executable_path = path)
 
 
 def getFootballGames(url):
-    path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+    #path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     #driver = webdriver.Chrome(executable_path=r"C:\Chrome\chromedriver.exe")
-    driver = webdriver.Chrome(executable_path = path)
+    #driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
 
     #print(driver)
@@ -61,6 +63,7 @@ def getFootballGames(url):
     a_tags=scroll_container.find_all('a')
     print(len(a_tags))
     #sys.exit()  
+    pass
 
 
     '''
@@ -68,21 +71,34 @@ def getFootballGames(url):
     '''
     
 
-    print("HERE WE GO \n\n\n")
+    print("AUTOMATED SCORE COLLECTION \n\n\n")
+    tag_dict={}
     for a in a_tags:
+        tag_dict[a]=[]
         first_div=(a.find('div'))
         inner_div=first_div.find_all('div')
         for item in inner_div:
             try:
-                pass
                 #print(item.text)
+                num=int(item.text)
+                tag_dict[a].append(num)
+                pass
+                
             except:
-                print('no text for this div tag')
-                print('\n------------------')
+                #print('no ints for this div tag')
+                #print('\n------------------')
+                pass
         #print("HERE WE GO \n\n\n")
-        print("Final Score:")
-        print(inner_div[18].text)
-        print(inner_div[20].text)
+        #try:
+        print(str(get_spans(a))+" Final Score:")
+        try:
+            print(tag_dict[0]+" - " + tag_dict[1])
+        except:
+        #    print("Final Score:")
+             print(inner_div[18].text)
+             print(inner_div[20].text)
+
+    pass
 
     
     # first_tag=a_tags[0]
@@ -102,6 +118,7 @@ def getFootballGames(url):
     TESTING SPAN TAGS
     '''
 
+def get_spans(a_tags):
     for tag in a_tags:
         sp=tag.find_all('span')
         text=""
@@ -109,9 +126,10 @@ def getFootballGames(url):
             try:
                 text=span.text
                 if 'Boys' in text:
-                    print(text)
+                    return(text)
             except:
                 pass
+    pass
 
     
     
@@ -125,7 +143,7 @@ def getFootballGames(url):
 
 
 
-
+def test_href(a_tags):
     TEST_TAG = []
 
     #a_tags=scroll_container.find_all('a')
@@ -161,6 +179,9 @@ def getFootballGames(url):
             print(span.text)
 
 
+    pass
+
+
 
 
 
@@ -175,7 +196,8 @@ def getFootballGames(url):
     OLD CODE 
     
     """
-
+    '''
+    soup = BeautifulSoup(html, "html.parser")
 
     #outer2 = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
     #print(outer2)
@@ -205,6 +227,7 @@ def getFootballGames(url):
     tbody = soup('div')
     #return inner
     return None
+    '''
     
 
 print(getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games'))
