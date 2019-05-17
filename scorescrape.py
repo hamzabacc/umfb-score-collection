@@ -81,8 +81,9 @@ def getFootballGames(url):
             try:
                 #print(item.text)
                 num=int(item.text)
-                tag_dict[a].append(num)
-                pass
+                print(num)
+                tag_dict[a]+=(num)
+                
                 
             except:
                 #print('no ints for this div tag')
@@ -92,13 +93,17 @@ def getFootballGames(url):
         #try:
         print(str(get_spans(a))+" Final Score:")
         try:
+            #for num in tag_dict:
+            #    print(num)
             print(tag_dict[0]+" - " + tag_dict[1])
         except:
         #    print("Final Score:")
              print(inner_div[18].text)
              print(inner_div[20].text)
 
-    pass
+    
+    driver.close()
+    return None
 
     
     # first_tag=a_tags[0]
@@ -129,7 +134,7 @@ def get_spans(a_tags):
                     return(text)
             except:
                 pass
-    pass
+    return None
 
     
     
@@ -178,8 +183,8 @@ def test_href(a_tags):
         if 'Boys' in span.text:
             print(span.text)
 
-
-    pass
+    driver.close()
+    return None
 
 
 
