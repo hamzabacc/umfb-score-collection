@@ -77,6 +77,7 @@ def getFootballGames(url):
         tag_dict[a]=[]
         first_div=(a.find('div'))
         inner_div=first_div.find_all('div')
+        print(str(get_spans(a))+" Final Score:")
         for item in inner_div:
             try:
                 #print(item.text)
@@ -91,6 +92,7 @@ def getFootballGames(url):
                 pass
         #print("HERE WE GO \n\n\n")
         #try:
+        '''
         print(str(get_spans(a))+" Final Score:")
         try:
             #for num in tag_dict:
@@ -100,6 +102,11 @@ def getFootballGames(url):
         #    print("Final Score:")
              print(inner_div[18].text)
              print(inner_div[20].text)
+        '''
+        
+        '''
+        ABOVE CODE RETRIEVES COMMON INDEX FOR SCORES IN THEIR RESPECTIVE DIVS, BUT NOT ALWAYS. MODIFIED TO RETRIEVE THEM THROUGH DYNAMIC INDICES
+        '''
 
     
     driver.close()
