@@ -126,9 +126,9 @@ def getFootballGames(url):
 
     
 
-    '''
-    TESTING SPAN TAGS
-    '''
+'''
+TESTING SPAN TAGS
+'''
 
 def get_spans(a_tags):
     for tag in a_tags:
@@ -147,11 +147,11 @@ def get_spans(a_tags):
     
 
 
-    '''
+'''
 
-    TESTING PULLS FROM INDIVIDUAL GAME PAGES
+TESTING PULLS FROM INDIVIDUAL GAME PAGES
 
-    '''
+'''
 
 
 
