@@ -17,61 +17,41 @@ import re
 #driver = webdriver.Chrome(executable_path = path)
 path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
 driver = webdriver.Chrome(executable_path = path)
+''' ^MAKE DRIVER AND PATH UNIVERSAL VARIABLES FOR USE ACROSS FXNS'''
 
 
 def getFootballGames(url):
     #path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
-    #driver = webdriver.Chrome(executable_path=r"C:\Chrome\chromedriver.exe")
     #driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
-
-    #print(driver)
-    #print(driver.find_element_by_link_text('football'))
-    #sys.exit()
+    
     #url = input('Enter - ')
     #html = urlopen(url).read()
     html=driver.page_source
     soup = BeautifulSoup(html, "html.parser")
-    #print(soup)
-    #info= soup.find_all('div', class_="ReactVirtualized__Grid__innerScrollContainer")
-    #print(info)
-    #print(soup.get_text())
-    b=soup.find('body')
-    #print(b)
     test_outer = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
-    #print(outer)
-    #time.sleep(10)
-
 
 
     '''
-
     CODE TO OBTAIN SCROLL CONTAINER + TAGS
-
     '''
 
-
-    outer=soup.find('div', attrs={'class':'rmq-1c61845d'})
+    #outer=soup.find('div', attrs={'class':'rmq-1c61845d'})
     #print(outer)  
     scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
     divs=scroll_container.find_all('div')
-    #print(scroll_container)
-    print(len(divs))
-    div_length=len(scroll_container.find_all('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"}))
-    print((div_length))
-    #<div style="height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"><div style="width: 100%; height: 100%; padding: 0px; border: 0px;">
+
     a_tags=scroll_container.find_all('a')
-    print(len(a_tags))
+    #print(len(a_tags))
     #sys.exit()  
-    pass
 
 
     '''
     TESTNG DIV RETRIEVAL INSIDE OF DIVS
     '''
-    
 
-    print("AUTOMATED SCORE COLLECTION \n\n\n")
+
+    print("\n\nAUTOMATED SCORE COLLECTION \n\n")
     tag_dict={}
     for a in a_tags:
         tag_dict[a]=[]
@@ -93,7 +73,6 @@ def getFootballGames(url):
                     #print('\n------------------')
                     pass
             #print("HERE WE GO \n\n\n")
-            #try:
             '''
             print(str(get_spans(a))+" Final Score:")
             try:
@@ -113,18 +92,6 @@ def getFootballGames(url):
     
     driver.close()
     return None
-
-    
-    # first_tag=a_tags[0]
-    # first_div=(first_tag.find('div'))
-    # inner_div=first_div.find_all('div')
-    # for item in inner_div:
-    #     try:
-    #         #pass
-    #         print(item.text)
-    #     except:
-    #         print('no text for this div tag')
-    #     print('\n------------------')
 
     
 
@@ -150,9 +117,7 @@ def get_spans(a_tags):
 
 
 '''
-
 TESTING PULLS FROM INDIVIDUAL GAME PAGES
-
 '''
 
 
@@ -204,7 +169,6 @@ def test_href(a_tags):
 
 
 
-
     """ 
 
     OLD CODE 
@@ -241,10 +205,13 @@ def test_href(a_tags):
     tbody = soup('div')
     #return inner
     return None
+    #<div 'style':"overflow: visible; width: 0px;"
+    #('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"})
     '''
     
 
+
+
 getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games')
 
-#<div 'style':"overflow: visible; width: 0px;"
-#('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"})
+
