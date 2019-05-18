@@ -77,32 +77,34 @@ def getFootballGames(url):
         tag_dict[a]=[]
         first_div=(a.find('div'))
         inner_div=first_div.find_all('div')
-        print(str(get_spans(a))+" Final Score:")
-        for item in inner_div:
+        sport=(str(get_spans(a))+" Final Score:")
+        if "Boys" in sport:
+            print(sport)
+            for item in inner_div:
+                try:
+                    #print(item.text)
+                    num=int(item.text)
+                    print(num)
+                    tag_dict[a]+=(num)
+                
+                
+                except:
+                    #print('no ints for this div tag')
+                    #print('\n------------------')
+                    pass
+            #print("HERE WE GO \n\n\n")
+            #try:
+            '''
+            print(str(get_spans(a))+" Final Score:")
             try:
-                #print(item.text)
-                num=int(item.text)
-                print(num)
-                tag_dict[a]+=(num)
-                
-                
+                #for num in tag_dict:
+                #    print(num)
+                print(tag_dict[0]+" - " + tag_dict[1])
             except:
-                #print('no ints for this div tag')
-                #print('\n------------------')
-                pass
-        #print("HERE WE GO \n\n\n")
-        #try:
-        '''
-        print(str(get_spans(a))+" Final Score:")
-        try:
-            #for num in tag_dict:
-            #    print(num)
-            print(tag_dict[0]+" - " + tag_dict[1])
-        except:
-        #    print("Final Score:")
-             print(inner_div[18].text)
-             print(inner_div[20].text)
-        '''
+            #    print("Final Score:")
+                print(inner_div[18].text)
+                print(inner_div[20].text)
+            '''
         
         '''
         ABOVE CODE RETRIEVES COMMON INDEX FOR SCORES IN THEIR RESPECTIVE DIVS, BUT NOT ALWAYS. MODIFIED TO RETRIEVE THEM THROUGH DYNAMIC INDICES
@@ -242,7 +244,7 @@ def test_href(a_tags):
     '''
     
 
-print(getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games'))
+getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games')
 
 #<div 'style':"overflow: visible; width: 0px;"
 #('div', attrs={'style':"height: 235px; left: 0px; position: absolute; top: 0px; width: 100%;"})
