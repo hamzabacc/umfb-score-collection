@@ -53,6 +53,9 @@ def getFootballGames(url):
 
     print("\n\nAUTOMATED SCORE COLLECTION \n\n")
     tag_dict={}
+
+    i=0
+
     for a in a_tags:
         tag_dict[a]=[]
         first_div=(a.find('div'))
@@ -60,9 +63,19 @@ def getFootballGames(url):
         sport=(str(get_spans(a))+" Final Score:")
         if "Boys" in sport:
             print(sport)
+            teams=(inner_div[1].text)
+            split=teams.split(',')
+            first_team=split[0]+split[1][:3]
+            second_team=split[1][3:]+split[2]
+            print(first_team)
+            print(second_team)
+            i2=0
             for item in inner_div:
                 try:
-                    #print(item.text)
+                    if i2<2 and i<1:
+                        print(item.text)
+                        i2+=1
+
                     num=int(item.text)
                     print(num)
                     tag_dict[a]+=(num)
@@ -72,6 +85,7 @@ def getFootballGames(url):
                     #print('no ints for this div tag')
                     #print('\n------------------')
                     pass
+            i+=1
             #print("HERE WE GO \n\n\n")
             '''
             print(str(get_spans(a))+" Final Score:")
@@ -80,10 +94,10 @@ def getFootballGames(url):
                 #    print(num)
                 print(tag_dict[0]+" - " + tag_dict[1])
             except:
-            #    print("Final Score:")
-                print(inner_div[18].text)
-                print(inner_div[20].text)
-            '''
+            #    print("Final Score:")'''
+                #print(inner_div[18].text)
+                #print(inner_div[20].text)
+            
         
         '''
         ABOVE CODE RETRIEVES COMMON INDEX FOR SCORES IN THEIR RESPECTIVE DIVS, BUT NOT ALWAYS. MODIFIED TO RETRIEVE THEM THROUGH DYNAMIC INDICES
