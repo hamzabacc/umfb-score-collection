@@ -60,7 +60,7 @@ def getFootballGames(url):
         tag_dict[a]=[]
         first_div=(a.find('div'))
         inner_div=first_div.find_all('div')
-        sport=(str(get_spans(a))+" Final Score:")
+        sport=('\n'+str(get_spans(a))+" Final Score:")
         if "Boys" in sport:
             team_count=1
             print(sport)
@@ -68,8 +68,8 @@ def getFootballGames(url):
             split=teams.split(',')
             first_team=split[0]+split[1][:3]
             second_team=split[1][3:]+split[2]
-            print(first_team)
-            print(second_team)
+            #print(first_team)
+            #print(second_team)
             teams=[first_team, second_team]
             i2=0
             for item in inner_div:
@@ -79,8 +79,9 @@ def getFootballGames(url):
                         i2+=1
 
                     num=int(item.text)
+                    print(teams[team_count-1])
                     print(num)
-                    print(teams[team_count])
+
                     #print(teams[team_count]+": "+str(num))
                     team_count=team_count+1
                     #tag_dict[a]+=(num)
