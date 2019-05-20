@@ -80,9 +80,10 @@ def getFootballGames(url):
 
                     num=int(item.text)
                     print(num)
+                    print(teams[team_count])
                     #print(teams[team_count]+": "+str(num))
-                    team_count+=1
-                    tag_dict[a]+=(num)
+                    team_count=team_count+1
+                    #tag_dict[a]+=(num)
                 
                 
                 except:
