@@ -52,12 +52,10 @@ def getFootballGames(url):
 
 
     print("\n\nAUTOMATED SCORE COLLECTION \n\n")
-    tag_dict={}
 
     i=0
 
     for a in a_tags:
-        tag_dict[a]=[]
         first_div=(a.find('div'))
         inner_div=first_div.find_all('div')
         sport=('\n'+str(get_spans(a))+" Final Score:")
@@ -74,17 +72,15 @@ def getFootballGames(url):
             i2=0
             for item in inner_div:
                 try:
-                    if i2<2 and i<1:
-                        print(item.text)
-                        i2+=1
+                    '''if i2<2 and i<1: 
+                        print(item.text)        PRINTS CONTENTS OF THE TAG WITH TEAM NAMES/CITIES FOR THE FIRST A_TAG RETRIEVED
+                        i2+=1'''        
+
 
                     num=int(item.text)
                     print(teams[team_count-1])
                     print(num)
-
-                    #print(teams[team_count]+": "+str(num))
                     team_count=team_count+1
-                    #tag_dict[a]+=(num)
                 
                 
                 except:
