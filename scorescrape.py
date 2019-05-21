@@ -59,11 +59,12 @@ def getFootballGames(url):
         cs_score=""
         first_div=(a.find('div'))
         inner_div=first_div.find_all('div')
+        raw_sport=(str(get_spans(a)))
         sport=('\n'+str(get_spans(a))+" Final Score:")
         if "Boys" in sport:
             team_count=1
             print(sport)
-            cs_score+=sport+","
+            cs_score+=raw_sport+","
             teams=(inner_div[1].text)
             split=teams.split(',')
             first_team=split[0]+split[1][:3]
@@ -84,7 +85,7 @@ def getFootballGames(url):
                     print(teams[team_count-1])
                     print(num)
                     if team_count==1:
-                        cs_score+=str(num)+","+second_team
+                        cs_score+=str(num)+","+second_team+","
                     elif team_count==2:
                         cs_score+=str(num)+"\n"
                     team_count=team_count+1
