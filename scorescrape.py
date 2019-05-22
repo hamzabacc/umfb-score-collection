@@ -162,7 +162,8 @@ TESTING PULLS FROM INDIVIDUAL GAME PAGES
 
 def test_href(a_tags):
     TEST_TAG = []
-
+    path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+    driver = webdriver.Chrome(executable_path = path)
     #a_tags=scroll_container.find_all('a')
     for tag in a_tags:
         try:
