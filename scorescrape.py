@@ -15,14 +15,14 @@ import re
 
 #path=r'C:\\Users\\Hamza\\Documents\\Football'
 #driver = webdriver.Chrome(executable_path = path)
-path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
-driver = webdriver.Chrome(executable_path = path)
+#path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+#driver = webdriver.Chrome(executable_path = path)
 ''' ^MAKE DRIVER AND PATH UNIVERSAL VARIABLES FOR USE ACROSS FXNS'''
 
 
 def getFootballGames(url):
-    #path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
-    #driver = webdriver.Chrome(executable_path = path)
+    path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+    driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
     
     #url = input('Enter - ')
