@@ -15,8 +15,8 @@ import re
 
 #path=r'C:\\Users\\Hamza\\Documents\\Football'
 #driver = webdriver.Chrome(executable_path = path)
-#path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
-#driver = webdriver.Chrome(executable_path = path)
+path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+driver = webdriver.Chrome(executable_path = path)
 ''' ^MAKE DRIVER AND PATH UNIVERSAL VARIABLES FOR USE ACROSS FXNS'''
 #NO LONGER UNIVERSAL VARS FOR SAKE OF REUSING CHROME WEBDRIVER
 
@@ -29,6 +29,7 @@ def getFootballGames(url):
     driver.get(url)
     
     '''CREATING CSV FILE DESTINATION'''
+    global EXECUTION_COUNT
     FILE_TITLE="test_csv"+str(EXECUTION_COUNT)+'.csv'
     f=open(FILE_TITLE,'w')
 
@@ -126,6 +127,7 @@ def getFootballGames(url):
 
     
     driver.close()
+    EXECUTION_COUNT+=1
     return None
 
     
