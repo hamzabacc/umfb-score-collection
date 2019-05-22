@@ -18,6 +18,9 @@ import re
 #path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
 #driver = webdriver.Chrome(executable_path = path)
 ''' ^MAKE DRIVER AND PATH UNIVERSAL VARIABLES FOR USE ACROSS FXNS'''
+#NO LONGER UNIVERSAL VARS FOR SAKE OF REUSING CHROME WEBDRIVER
+
+EXECUTION_COUNT=0
 
 
 def getFootballGames(url):
@@ -25,6 +28,12 @@ def getFootballGames(url):
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
     
+    '''CREATING CSV FILE DESTINATION'''
+    FILE_TITLE="test_csv"+str(EXECUTION_COUNT)+'.csv'
+    f=open(FILE_TITLE,'w')
+
+
+
     #url = input('Enter - ')
     #html = urlopen(url).read()
     html=driver.page_source
@@ -97,6 +106,7 @@ def getFootballGames(url):
                     pass
             i+=1
             print(cs_score)
+            f.write(cs_score)
             #print("HERE WE GO \n\n\n")
             '''
             print(str(get_spans(a))+" Final Score:")
