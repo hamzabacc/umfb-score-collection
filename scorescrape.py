@@ -252,5 +252,6 @@ def test_href(a_tags):
 
 getFootballGames('https://scorestream.com/team/skyline-high-school-eagles-243352/games')
 getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games')
+getFootballGames('https://scorestream.com/team/bedford-high-school-kicking-mules-7779/games')
 
 
