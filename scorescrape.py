@@ -24,6 +24,7 @@ EXECUTION_COUNT=0
 
 
 def getFootballGames(url):
+    one_game=False
     path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
@@ -107,7 +108,9 @@ def getFootballGames(url):
                     pass
             i+=1
             print(cs_score)
-            f.write(cs_score)
+            if not one_game:
+                f.write(cs_score)
+                one_game=True
             #print("HERE WE GO \n\n\n")
             '''
             print(str(get_spans(a))+" Final Score:")
