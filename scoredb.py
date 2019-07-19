@@ -31,12 +31,18 @@ for line in lines:
 conn.commit()
 
 
-#f=open('TEST_BASEBALL_SCORES_19JULY2019.csv','w')
+f=open('TEST_BASEBALL_SCORES_19JULY2019.csv','w')
 (cur.execute('select * from Schools'))
+count=0
 for row in (cur.fetchall()):
-    print(row[0])
-    print(scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball'))
-    #f.write(','.join(row[0],row[1],getFootballGames(row[1],'Boys Varsity Baseball')))
+    if count>0:
+        break
+    count+=1
+    print(row[1])
+    #print(scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball'))
+    schoolData=[row[0],row[1],scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball')]
+    print(schoolData)
+    #f.write(','.join(schoolData))
 
 
 
