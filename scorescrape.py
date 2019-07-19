@@ -1,6 +1,6 @@
 # To run this, you need to install BeautifulSoup if you aren't using anaconda
 # https://pypi.python.org/pypi/beautifulsoup4
-#import urllib
+#import urllibgit 
 
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
@@ -23,7 +23,7 @@ import re
 EXECUTION_COUNT=0
 
 
-def getFootballGames(url):
+def getFootballGames(url, sportKey):
     one_game=False
     path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     driver = webdriver.Chrome(executable_path = path)
@@ -72,7 +72,7 @@ def getFootballGames(url):
         inner_div=first_div.find_all('div')
         raw_sport=(str(get_spans(a)))
         sport=('\n'+str(get_spans(a))+" Final Score:")
-        if "Boys" in sport:
+        if sportKey in sport:
             team_count=1
             print(sport)
             cs_score+=raw_sport+","
@@ -253,9 +253,9 @@ def test_href(a_tags):
     
 
 
-getFootballGames('https://scorestream.com/team/skyline-high-school-eagles-243352/games')
-getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games')
-getFootballGames('https://scorestream.com/team/bedford-high-school-kicking-mules-7779/games')
+getFootballGames('https://scorestream.com/team/skyline-high-school-eagles-243352/games', 'Boys Varsity Baseball')
+#getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games')
+#getFootballGames('https://scorestream.com/team/bedford-high-school-kicking-mules-7779/games')
 
 
 #marking changes for 7/18 reinitiation
