@@ -10,6 +10,7 @@ cur.execute('create table Schools(name text, scorestreamURL text)')
 f = open('DB_TEST_2020PROSPECT_18JULY2019.csv', 'r')
 lines = f.readlines()
 count = 0
+f.close()
 
 
 for line in lines:
@@ -22,12 +23,23 @@ for line in lines:
             url = line.split(',')[1]
             command = 'insert into Schools (name, scorestreamURL) values (?,?)'
             values = (name, url)
-            print(values)
+            #print(values)
             cur.execute(command, values)
 
         else: pass
 
 conn.commit()
+
+
+#f=open('TEST_BASEBALL_SCORES_19JULY2019.csv','w')
+(cur.execute('select * from Schools'))
+for row in (cur.fetchall()):
+    print(row[0])
+    print(scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball'))
+    #f.write(','.join(row[0],row[1],getFootballGames(row[1],'Boys Varsity Baseball')))
+
+
+
 
 '''TOMORROW:
 CREATE THIRD FILE FOR TEST SCORE RETRIEVAL:
@@ -36,4 +48,9 @@ CREATE THIRD FILE FOR TEST SCORE RETRIEVAL:
 - TEST MOST RECENT SCORE RETRIEVAL FOR EACH ONE FOR VARIOUS SPORTS
 
 ** MODIFY THE GETFOOTBALLGAMES METHOD TO ACCEPT PARAMETER OF WHICH SPORT TO RETRIEVE SCORE OF
+
+
+
+$$ ADD DATE EXTRACTION WITH SCORES AND METHOD TO CONVERT DATE SO IT ONLY RETRIEVES WITHIN LIMITED DATE PARAMETER.
+THIS WILL ALLOW SEPARATE SQL SHEET FOR EACH WEEK OF THE FOOTBALL SEASON
 '''
