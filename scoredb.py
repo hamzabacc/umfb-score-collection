@@ -1,4 +1,5 @@
 import sqlite3
+import scorescrape
 
 conn = sqlite3.connect('Scores.sqlite')
 cur = conn.cursor()
@@ -27,3 +28,12 @@ for line in lines:
         else: pass
 
 conn.commit()
+
+'''TOMORROW:
+CREATE THIRD FILE FOR TEST SCORE RETRIEVAL:
+- IMPORT SCORESCRAPE FILE
+- RETRIEVE EACH SCHOOL'S NAME AND URL
+- TEST MOST RECENT SCORE RETRIEVAL FOR EACH ONE FOR VARIOUS SPORTS
+
+** MODIFY THE GETFOOTBALLGAMES METHOD TO ACCEPT PARAMETER OF WHICH SPORT TO RETRIEVE SCORE OF
+'''
