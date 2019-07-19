@@ -258,3 +258,4 @@ getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385
 getFootballGames('https://scorestream.com/team/bedford-high-school-kicking-mules-7779/games')
 
 
+#marking changes for 7/18 reinitiation
