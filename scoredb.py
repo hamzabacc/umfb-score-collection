@@ -40,7 +40,9 @@ for row in (cur.fetchall()):
     count+=1
     print(row[1])
     #print(scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball'))
-    schoolData=[row[0],row[1],scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball')]
+    schoolData=[row[0],row[1][0:len(row[1])-2]]
+    score = scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball')
+    schoolData.append(score[0][0:len(score)-2])
     print(schoolData)
     #f.write(','.join(schoolData))
 
