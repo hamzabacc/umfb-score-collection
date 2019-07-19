@@ -65,6 +65,7 @@ def getFootballGames(url, sportKey):
     print("\n\nAUTOMATED SCORE COLLECTION \n\n")
 
     i=0
+    cs_scores=[]
 
     for a in a_tags:
         cs_score=""
@@ -108,6 +109,7 @@ def getFootballGames(url, sportKey):
                     pass
             i+=1
             print(cs_score)
+            cs_scores.append(cs_score)
             if not one_game:
                 f.write(cs_score)
                 one_game=True
@@ -132,7 +134,7 @@ def getFootballGames(url, sportKey):
     driver.close()
     f.close()
     EXECUTION_COUNT+=1
-    return None
+    return cs_scores
 
     
 
@@ -253,7 +255,7 @@ def test_href(a_tags):
     
 
 
-getFootballGames('https://scorestream.com/team/skyline-high-school-eagles-243352/games', 'Boys Varsity Baseball')
+#getFootballGames('https://scorestream.com/team/skyline-high-school-eagles-243352/games', 'Boys Varsity Baseball')
 #getFootballGames('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games')
 #getFootballGames('https://scorestream.com/team/bedford-high-school-kicking-mules-7779/games')
 
