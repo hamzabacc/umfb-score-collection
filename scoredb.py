@@ -26,4 +26,4 @@ for line in lines:
 
         else: pass
 
-
+conn.commit()
