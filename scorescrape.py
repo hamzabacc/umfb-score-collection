@@ -23,7 +23,7 @@ import re
 EXECUTION_COUNT=0
 
 
-def getFootballGames(url, sportKey):
+def getScoreStream(url, sportKey):
     one_game=False
     path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     driver = webdriver.Chrome(executable_path = path)
@@ -32,7 +32,8 @@ def getFootballGames(url, sportKey):
     '''CREATING CSV FILE DESTINATION'''
     global EXECUTION_COUNT
     FILE_TITLE="test_csv"+str(EXECUTION_COUNT)+'.csv'
-    f=open(FILE_TITLE,'w')
+    #f=open(FILE_TITLE,'w')
+    '''^^if needed to make individual excel sheet for EACH GAME'''
 
 
 
@@ -110,8 +111,10 @@ def getFootballGames(url, sportKey):
             i+=1
             print(cs_score)
             cs_scores.append(cs_score)
+            if (len(cs_scores))>0:
+                break
             if not one_game:
-                f.write(cs_score)
+                #f.write(cs_score)
                 one_game=True
             #print("HERE WE GO \n\n\n")
             '''
@@ -132,7 +135,7 @@ def getFootballGames(url, sportKey):
 
     
     driver.close()
-    f.close()
+    #f.close()
     EXECUTION_COUNT+=1
     return cs_scores
 
