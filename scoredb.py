@@ -34,18 +34,23 @@ conn.commit()
 f=open('TEST_BASEBALL_SCORES_19JULY2019.csv','w')
 (cur.execute('select * from Schools'))
 count=0
+f.write('school, scorestream url, sport, away team, away score, home team, home score\n')
 for row in (cur.fetchall()):
-    if count>0:
-        break
+    #if count>0:
+    #    break
     count+=1
-    print(row[1])
+    #print(row[1])
     #print(scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball'))
     schoolData=[row[0],row[1][0:len(row[1])-2]]
     score = scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball')
-    schoolData.append(score[0][0:len(score)-2])
-    print(schoolData)
-    #f.write(','.join(schoolData))
-
+    try: 
+        schoolData.append(score[0][0:len(score)-2])
+    except:
+        schoolData.append(',,,,,NO RECENT SCORE DATA AVAILABLE FOR THIS SCHOOL FOR THE SELECTED SPORT')
+    #print(schoolData)
+    schoolData.append('\n')
+    f.write(','.join(schoolData))
+f.close()
 
 
 
