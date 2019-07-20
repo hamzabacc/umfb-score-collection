@@ -40,9 +40,9 @@ for row in (cur.fetchall()):
     #    break
     count+=1
     #print(row[1])
-    #print(scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball'))
+    #print(scorescrape.getScoreStream(row[1]+'/games','Boys Varsity Baseball'))
     schoolData=[row[0],row[1][0:len(row[1])-2]]
-    score = scorescrape.getFootballGames(row[1]+'/games','Boys Varsity Baseball')
+    score = scorescrape.getScoreStream(row[1]+'/games','Boys Varsity Baseball')
     try: 
         schoolData.append(score[0][0:len(score)-2])
     except:
