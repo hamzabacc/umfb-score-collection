@@ -5,6 +5,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 import ssl
 import unittest
 import requests
@@ -25,10 +26,13 @@ EXECUTION_COUNT=0
 
 def getScoreStream(url, sportKey):
     one_game=False
+    #football_found = False
     path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
     
+
+    #NO LONGER IN USE
     '''CREATING CSV FILE DESTINATION'''
     global EXECUTION_COUNT
     FILE_TITLE="test_csv"+str(EXECUTION_COUNT)+'.csv'
