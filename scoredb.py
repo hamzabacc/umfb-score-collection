@@ -35,7 +35,7 @@ conn.commit()
 f=open('TEST_BASEBALL_SCORES_19JULY2019.csv','w')
 (cur.execute('select * from Schools'))
 count=0
-f.write('school, scorestream url, sport, away team, away score, home team, home score\n')
+f.write('school, scorestream url, ss sport, ss away team, ss away score, ss home team, ss home score\n')
 for row in (cur.fetchall()):
     #if count>0:
     #    break
