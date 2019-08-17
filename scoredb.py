@@ -32,7 +32,7 @@ for line in lines:
 conn.commit()
 
 
-f=open('TEST_BASEBALL_SCORES_19JULY2019.csv','w')
+f=open('TEST_BASEBALL_SCORES_17AUGUST2019.csv','w')
 (cur.execute('select * from Schools'))
 count=0
 f.write('school, scorestream url, ss sport, ss away team, ss away score, ss home team, ss home score\n')
