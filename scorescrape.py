@@ -55,7 +55,10 @@ def getScoreStream(url, sportKey):
     #outer=soup.find('div', attrs={'class':'rmq-1c61845d'})
     #print(outer)  
     scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
-    divs=scroll_container.find_all('div')
+    try:
+        divs=scroll_container.find_all('div')
+    except:
+        return "NO RECENT SCORES FOR "+sportKey+" AVAILABLE"
 
     a_tags=scroll_container.find_all('a')
     #print(len(a_tags))
