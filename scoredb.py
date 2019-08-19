@@ -1,6 +1,6 @@
 
 import sqlite3
-import scorescrape
+import scorescrape2
 
 conn = sqlite3.connect('Scores.sqlite')
 cur = conn.cursor()
@@ -32,16 +32,24 @@ for line in lines:
 conn.commit()
 
 
-f=open('TEST_BASEBALL_SCORES_17AUGUST2019.csv','w')
+f=open('newtestdoc.csv','w')
+#f.write(scorescrape.getScoreStream)
+
+f=open('TEST_BASEBALL_SCORES_19AUGUST2019.csv','w')
 (cur.execute('select * from Schools'))
 count=0
-f.write('school, scorestream url, ss sport, ss away team, ss away score, ss home team, ss home score\n')
+f.write('school, ss home team, ss home-away score, ss away team, ss game date\n')
 for row in (cur.fetchall()):
+    f.write(scorescrape2.getScoreStream(row[1]+'/games')+'\n')
+f.close()
+'''
+
     #if count>0:
     #    break
     count+=1
     #print(row[1])
     #print(scorescrape.getScoreStream(row[1]+'/games','Boys Varsity Baseball'))
+    
     schoolData=[row[0],row[1][0:len(row[1])-2]]
     score = scorescrape.getScoreStream(row[1]+'/games','Boys Varsity Baseball')
     try: 
@@ -51,7 +59,7 @@ for row in (cur.fetchall()):
     #print(schoolData)
     schoolData.append('\n')
     f.write(','.join(schoolData))
-f.close()
+f.close()'''
 
 
 
