@@ -32,15 +32,18 @@ for line in lines:
 conn.commit()
 
 
-f=open('newtestdoc.csv','w')
+f=open('newtestdoc2.csv','w')
 #f.write(scorescrape.getScoreStream)
 
-f=open('TEST_BASEBALL_SCORES_19AUGUST2019.csv','w')
+#f=open('TEST_BASEBALL_SCORES_19AUGUST2019.csv','w')
 (cur.execute('select * from Schools'))
 count=0
-f.write('school, ss home team, ss home-away score, ss away team, ss game date\n')
+f.write('school, team, opponent, score, date\n')
 for row in (cur.fetchall()):
-    f.write(scorescrape2.getScoreStream(row[1]+'/games')+'\n')
+    if(len(row[1])==0):
+        f.write("no scorestream link for this school")
+    else:
+        f.write(scorescrape2.getScoreStream(row[1]+'/games','Boys Varsity Baseball')+"\n")
 f.close()
 '''
 
