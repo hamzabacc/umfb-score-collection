@@ -38,12 +38,12 @@ f=open('newtestdoc2.csv','w')
 #f=open('TEST_BASEBALL_SCORES_19AUGUST2019.csv','w')
 (cur.execute('select * from Schools'))
 count=0
-f.write('school, team, opponent, score, date\n')
+f.write('team, opponent, score, date\n')
 for row in (cur.fetchall()):
     if(len(row[1])==0):
         f.write("no scorestream link for this school")
     else:
-        f.write(scorescrape2.getScoreStream(row[1]+'/games','Boys Varsity Baseball')+"\n")
+        f.write(scorescrape2.getScoreStream(row[1]+'/games','Boys Varsity')+"\n")
 f.close()
 '''
 
