@@ -18,7 +18,7 @@ def getScoreStream(url, sportKey=""):
 
     html=driver.page_source
     soup = BeautifulSoup(html, "html.parser")
-    test_outer = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
+    #test_outer = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
 
 
     '''
@@ -31,7 +31,7 @@ def getScoreStream(url, sportKey=""):
     for a in a_tags:
         spans=a.find_all('span')
         for span in spans:
-            if (span.text=='Boys Varsity Baseball'):
+            if (span.text==sportKey):
                 football_game=True
         div1=a.find('div')
         div2=div1.find('div')
@@ -60,14 +60,37 @@ def getScoreStream(url, sportKey=""):
     else:
         away_score=ints[0]
         home_score=ints[1]
+    TEAM_NAME=str(soup.find('h1').text)
+    #for name in TEAM_NAME:
+    #    print(name.text)
+    #return None
+    #away_school=spans[0].txt
     away_team=(spans[0].text+" "+spans[1].text)
+    #home_school=spans[2].text
     home_team=(spans[2].text+" "+spans[3].text)
     date=(spans[7].text)
-    for span in spans: 
-        print(span.text)
-    return (home_team+','+str(home_score)+' to '+str(away_score)+','+away_team+','+date)
+    #for span in spans: 
+    #    print(span.text)
+    RESULT = ""
+    outcome= ""
+    if TEAM_NAME==(away_team):
+        if(away_score>home_score):
+            outcome='W '+str(away_score)+"-"+str(home_score)
+        else: 
+            if(home_score>away_score):
+                outcome='L '+str(home_score)+"-"+str(away_score)
+        RESULT=away_team+',''@ '+str(home_team)+','+outcome+','+date
+    else:
+        if TEAM_NAME==(home_team):
+            if(away_score>home_score):
+                outcome='L '+str(away_score)+"-"+str(home_score)
+            else: 
+                if(home_score>away_score):
+                    outcome='W '+str(home_score)+"-"+str(away_score)
+        RESULT=home_team+',''vs. '+str(away_team)+','+outcome+','+date
+    return RESULT
 
     
 
 
-print(getScoreStream('https://scorestream.com/team/pioneer-high-school-pioneers-8385/games'))
+print(getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678/games', 'Boys Varsity Football'))
