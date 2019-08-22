@@ -25,9 +25,15 @@ def getScoreStream(url, sportKey=""):
     CODE TO OBTAIN SCROLL CONTAINER + TAGS
     '''
 
+    span_city_state=soup.find('span', attrs={'itemprop':'address'})
+    city_state=span_city_state.text
+    state=city_state[len(city_state)-2:]
+
+    
     scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
     a_tags=scroll_container.find_all('a')
     TEAM_NAME=str(soup.find('h1').text)
+
 
     football_game=False
     for a in a_tags:
@@ -66,6 +72,8 @@ def getScoreStream(url, sportKey=""):
         away_score=ints[0]
         home_score=ints[1]
 
+    
+
     RESULT = ""
     outcome= ""
     opponent=""
@@ -76,7 +84,7 @@ def getScoreStream(url, sportKey=""):
         else: 
             if(home_score>away_score):
                 outcome='L '+str(home_score)+"-"+str(away_score)
-        RESULT=away_team+',''@ '+str(home_team)+','+outcome+','+date
+        RESULT=away_team+','+state+','+'@ '+str(home_team)+','+outcome+','+date
     else:
         if TEAM_NAME==(home_team):
             opponent="vs. " + away_team
@@ -85,14 +93,16 @@ def getScoreStream(url, sportKey=""):
             else: 
                 if(home_score>away_score):
                     outcome='W '+str(home_score)+"-"+str(away_score)
-        RESULT=home_team+',''vs. '+str(away_team)+','+outcome+','+date
+        RESULT=home_team+','+state+','+'vs. '+str(away_team)+','+outcome+','+date
     driver.close()
     if not football_game:
-        return TEAM_NAME+","+opponent+",No score available for the selected sport,"
+        return TEAM_NAME+","+state+','+opponent+",No score available for the selected sport,"
     if not two_scores:
-        return(TEAM_NAME+","+opponent+",more than two score numbers pulled. check manually,")
+        return(TEAM_NAME+","+state+','+opponent+",more than two score numbers pulled. check manually,")
     if not final:
-        return(TEAM_NAME+","+opponent+",score available is not a final score,")
+        return(TEAM_NAME+","+state+','+opponent+",score available is not a final score,")
+    
+    
     
     return RESULT
     
@@ -100,4 +110,4 @@ def getScoreStream(url, sportKey=""):
     
 
 
-#print(getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678/games', 'Boys Varsity Football'))
+print(getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678/games', 'Boys Varsity Football'))
