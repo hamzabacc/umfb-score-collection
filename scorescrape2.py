@@ -16,6 +16,9 @@ def getScoreStream(url, sportKey=""):
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
 
+    time.sleep(2)
+
+
     html=driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     #test_outer = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
