@@ -16,7 +16,7 @@ def getScoreStream(url, sportKey=""):
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
 
-    time.sleep(2)
+    #time.sleep(2)
 
 
     html=driver.page_source
@@ -34,10 +34,20 @@ def getScoreStream(url, sportKey=""):
 
     
     scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
-    a_tags=scroll_container.find_all('a')
+    try:
+        a_tags=scroll_container.find_all('a')
+    except:
+        time.sleep(5)
+        html=driver.page_source
+        soup = BeautifulSoup(html, "html.parser")
+        span_city_state=soup.find('span', attrs={'itemprop':'address'})
+        city_state=span_city_state.text
+        state=city_state[len(city_state)-2:]
+        scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
+        a_tags=scroll_container.find_all('a')
     TEAM_NAME=str(soup.find('h1').text)
 
-
+    #return len(a_tags)
     football_game=False
     for a in a_tags:
         spans=a.find_all('span')
@@ -46,7 +56,7 @@ def getScoreStream(url, sportKey=""):
                 football_game=True
         div1=a.find('div')
         div2=div1.find('div')
-        score_container=div2.find_all('div')[1]
+        #score_container=div2.find_all('div')[1]
         if (football_game):
             break
 
@@ -69,6 +79,9 @@ def getScoreStream(url, sportKey=""):
 
     two_scores=True
     date=(spans[7].text)
+    if ("\'18" in date and "\'19" not in date):
+        date+=",**WARNING** it looks like this game is from 2018. Please confirm score manually.,"
+
     if(len(ints)>2):
         two_scores=False
     else:
@@ -99,11 +112,11 @@ def getScoreStream(url, sportKey=""):
         RESULT=home_team+','+state+','+'vs. '+str(away_team)+','+outcome+','+date
     driver.close()
     if not football_game:
-        return TEAM_NAME+","+state+','+opponent+",No score available for the selected sport,"
+        return TEAM_NAME+","+state+','+opponent+",no recent football scores available,"
     if not two_scores:
         return(TEAM_NAME+","+state+','+opponent+",more than two score numbers pulled. check manually,")
     if not final:
-        return(TEAM_NAME+","+state+','+opponent+",score available is not a final score,")
+        return(TEAM_NAME+","+state+','+opponent+",score available is not a final score,"+date)
     
     
     
@@ -111,6 +124,7 @@ def getScoreStream(url, sportKey=""):
     
 
     
-
-
+#BE SURE TO ADD /games TO TESTING URLS!
+print(getScoreStream('https://scorestream.com/team/miami-central-senior-high-school-rockets-4021/games', 'Boys Varsity Football'))
+print(getScoreStream('https://scorestream.com/team/pinnacle-high-school-pioneers-1156/games','Boys Varsity Football'))
 print(getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678/games', 'Boys Varsity Football'))
