@@ -60,7 +60,16 @@ def getScoreStream(url, sportKey=""):
         if (football_game):
             break
 
+    cancelled=False
     inners= div2.find_all('div',attrs={'style':"font-size: 48px; display: flex; position: relative; flex-direction: column;"})
+    #return inners[0].find('div').text
+    try: 
+        if ("Cancelled" in inners[0].find('div').text):
+            cancelled=True
+    except: pass
+    
+    #return cancelled
+
     ints=[]
     final = False
     for tag in inners[0].find_all('div'):
@@ -80,7 +89,13 @@ def getScoreStream(url, sportKey=""):
     two_scores=True
     date=(spans[7].text)
     if ("\'18" in date and "\'19" not in date):
-        date+=",**WARNING** it looks like this game is from 2018. Please confirm score manually.,"
+        return TEAM_NAME+","+state+','+"N/A"+",no recent football scores available,"
+
+    if cancelled:
+        if(TEAM_NAME==(away_team)):
+            return TEAM_NAME+','+state+','+'@'+home_team+","+'Cancelled,'+date+','
+        else: return TEAM_NAME+','+state+','+'vs. '+away_team+','+'Cancelled,'+date+','
+
 
     if(len(ints)>2):
         two_scores=False
@@ -112,7 +127,7 @@ def getScoreStream(url, sportKey=""):
         RESULT=home_team+','+state+','+'vs. '+str(away_team)+','+outcome+','+date
     driver.close()
     if not football_game:
-        return TEAM_NAME+","+state+','+opponent+",no recent football scores available,"
+        return TEAM_NAME+","+state+','+"N/A"+",no recent football scores available,"
     if not two_scores:
         return(TEAM_NAME+","+state+','+opponent+",more than two score numbers pulled. check manually,")
     if not final:
@@ -123,7 +138,7 @@ def getScoreStream(url, sportKey=""):
     return RESULT
     
 
-    
+print(getScoreStream('https://scorestream.com/team/bergen-catholic-high-school-crusaders-243975/games','Boys Varsity Football'))  
 #BE SURE TO ADD /games TO TESTING URLS!
 #print(getScoreStream('https://scorestream.com/team/miami-central-senior-high-school-rockets-4021/games', 'Boys Varsity Football'))
 #print(getScoreStream('https://scorestream.com/team/pinnacle-high-school-pioneers-1156/games','Boys Varsity Football'))
