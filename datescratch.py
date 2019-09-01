@@ -24,8 +24,13 @@ def date_format(date):
             weekday=int(days[key])
             break
         
-    
-    return datetime.strftime(datetime.now() - timedelta(weekday), '%m-%d')
+    date_words=date.split()
+    time =""
+    for word in date_words:
+        if ':' in word:
+            time=word+" "+date_words[-1]
+
+    return datetime.strftime(datetime.now() - timedelta(weekday), '%m/%d') + " at "+time
     #date.today()
     
     '''est = timezone('EST')
