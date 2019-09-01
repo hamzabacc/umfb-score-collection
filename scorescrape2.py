@@ -9,6 +9,7 @@ import sys as sys
 import time
 import os
 import re
+import datescratch
 
 
 def getScoreStream(url, sportKey=""):
@@ -93,10 +94,10 @@ def getScoreStream(url, sportKey=""):
 
     if cancelled:
         if(TEAM_NAME==(away_team)):
-            return TEAM_NAME+','+state+','+'@'+home_team+","+'Cancelled,'+date+','
-        else: return TEAM_NAME+','+state+','+'vs. '+away_team+','+'Cancelled,'+date+','
+            return TEAM_NAME+','+state+','+'@'+home_team+","+'Cancelled,'+datescratch.date_format(date)+','
+        else: return TEAM_NAME+','+state+','+'vs. '+away_team+','+'Cancelled,'+datescratch.date_format(date)+','
 
-    if 'Last' not in date and 'Yesterday' not in date and 'Today' not in date:
+    if 'Last' not in date and 'Yesterday' not in date and 'Today' not in date and football_game:
         return TEAM_NAME+","+state+','+"N/A"+",most recent score isn't from this week"
 
 
@@ -118,7 +119,7 @@ def getScoreStream(url, sportKey=""):
         else: 
             if(home_score>away_score):
                 outcome='L '+str(home_score)+"-"+str(away_score)
-        RESULT=away_team+','+state+','+'@ '+str(home_team)+','+outcome+','+date
+        RESULT=away_team+','+state+','+'@ '+str(home_team)+','+outcome+','+datescratch.date_format(date)
     else:
         if TEAM_NAME==(home_team):
             opponent="vs. " + away_team
@@ -127,14 +128,14 @@ def getScoreStream(url, sportKey=""):
             else: 
                 if(home_score>away_score):
                     outcome='W '+str(home_score)+"-"+str(away_score)
-        RESULT=home_team+','+state+','+'vs. '+str(away_team)+','+outcome+','+date
+        RESULT=home_team+','+state+','+'vs. '+str(away_team)+','+outcome+','+datescratch.date_format(date)
     driver.close()
     if not football_game:
         return TEAM_NAME+","+state+','+"N/A"+",no recent football scores available,"
     if not two_scores:
         return(TEAM_NAME+","+state+','+opponent+",more than two score numbers pulled. check manually,")
     if not final:
-        return(TEAM_NAME+","+state+','+opponent+",score available is not a final score,"+date)
+        return(TEAM_NAME+","+state+','+opponent+",score available is not a final score,"+datescratch.date_format(date))
     
     
     
