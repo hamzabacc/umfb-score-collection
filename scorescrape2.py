@@ -96,6 +96,9 @@ def getScoreStream(url, sportKey=""):
             return TEAM_NAME+','+state+','+'@'+home_team+","+'Cancelled,'+date+','
         else: return TEAM_NAME+','+state+','+'vs. '+away_team+','+'Cancelled,'+date+','
 
+    if 'Last' not in date and 'Yesterday' not in date and 'Today' not in date:
+        return TEAM_NAME+","+state+','+"N/A"+",most recent score isn't from this week"
+
 
     if(len(ints)>2):
         two_scores=False
@@ -138,7 +141,7 @@ def getScoreStream(url, sportKey=""):
     return RESULT
     
 
-print(getScoreStream('https://scorestream.com/team/bergen-catholic-high-school-crusaders-243975/games','Boys Varsity Football'))  
+#print(getScoreStream('https://scorestream.com/team/bergen-catholic-high-school-crusaders-243975/games','Boys Varsity Football'))  
 #BE SURE TO ADD /games TO TESTING URLS!
 #print(getScoreStream('https://scorestream.com/team/miami-central-senior-high-school-rockets-4021/games', 'Boys Varsity Football'))
 #print(getScoreStream('https://scorestream.com/team/pinnacle-high-school-pioneers-1156/games','Boys Varsity Football'))
