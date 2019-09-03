@@ -42,8 +42,3 @@ for row in (cur.fetchall()):
         f.write(scorescrape2.getScoreStream(row[1]+'/games','Boys Varsity Football')+"\n")
 f.close()
 
-
-'''
-$$ ADD DATE EXTRACTION WITH SCORES AND METHOD TO CONVERT DATE SO IT ONLY RETRIEVES WITHIN LIMITED DATE PARAMETER.
-THIS WILL ALLOW SEPARATE SQL SHEET FOR EACH WEEK OF THE FOOTBALL SEASON
-'''
