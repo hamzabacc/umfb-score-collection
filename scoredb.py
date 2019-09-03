@@ -44,25 +44,6 @@ f.close()
 
 
 '''
-
-    #if count>0:
-    #    break
-    count+=1
-    #print(row[1])
-    #print(scorescrape.getScoreStream(row[1]+'/games','Boys Varsity Baseball'))
-    
-    schoolData=[row[0],row[1][0:len(row[1])-2]]
-    score = scorescrape.getScoreStream(row[1]+'/games','Boys Varsity Baseball')
-    try: 
-        schoolData.append(score[0][0:len(score)-2])
-    except:
-        schoolData.append(',,,,,NO RECENT SCORE DATA AVAILABLE FOR THIS SCHOOL FOR THE SELECTED SPORT')
-    #print(schoolData)
-    schoolData.append('\n')
-    f.write(','.join(schoolData))
-f.close()'''
-'''
-
 $$ ADD DATE EXTRACTION WITH SCORES AND METHOD TO CONVERT DATE SO IT ONLY RETRIEVES WITHIN LIMITED DATE PARAMETER.
 THIS WILL ALLOW SEPARATE SQL SHEET FOR EACH WEEK OF THE FOOTBALL SEASON
 '''
