@@ -17,12 +17,8 @@ def getScoreStream(url, sportKey=""):
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
 
-    #time.sleep(2)
-
-
     html=driver.page_source
     soup = BeautifulSoup(html, "html.parser")
-    #test_outer = soup.find('div', attrs={'id':"react-root",'class':"scorestream_ui"})
 
 
     '''
@@ -48,7 +44,6 @@ def getScoreStream(url, sportKey=""):
         a_tags=scroll_container.find_all('a')
     TEAM_NAME=str(soup.find('h1').text)
 
-    #return len(a_tags)
     football_game=False
     for a in a_tags:
         spans=a.find_all('span')
@@ -57,32 +52,26 @@ def getScoreStream(url, sportKey=""):
                 football_game=True
         div1=a.find('div')
         div2=div1.find('div')
-        #score_container=div2.find_all('div')[1]
         if (football_game):
             break
 
     cancelled=False
     inners= div2.find_all('div',attrs={'style':"font-size: 48px; display: flex; position: relative; flex-direction: column;"})
-    #return inners[0].find('div').text
     try: 
         if ("Cancelled" in inners[0].find('div').text):
             cancelled=True
     except: pass
     
-    #return cancelled
 
     ints=[]
     final = False
     for tag in inners[0].find_all('div'):
-        #print(tag.text)
         try:
             ints.append(int(tag.text))
         except:
             pass
-        #try:
         if(tag.text==('Final')):
                 final=True
-        #except:pass
     
     away_team=(spans[0].text+" "+spans[1].text)
     home_team=(spans[2].text+" "+spans[3].text)
@@ -142,8 +131,8 @@ def getScoreStream(url, sportKey=""):
     return RESULT
     
 
-#print(getScoreStream('https://scorestream.com/team/bergen-catholic-high-school-crusaders-243975/games','Boys Varsity Football'))  
 #BE SURE TO ADD /games TO TESTING URLS!
+#print(getScoreStream('https://scorestream.com/team/bergen-catholic-high-school-crusaders-243975/games','Boys Varsity Football'))  
 #print(getScoreStream('https://scorestream.com/team/miami-central-senior-high-school-rockets-4021/games', 'Boys Varsity Football'))
 #print(getScoreStream('https://scorestream.com/team/pinnacle-high-school-pioneers-1156/games','Boys Varsity Football'))
 #print(getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678/games', 'Boys Varsity Football'))
