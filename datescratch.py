@@ -33,26 +33,23 @@ def date_format(date):
         if "Today" in date:
             day_diff=0
         
-
-    return datetime.strftime(datetime.now() - timedelta(day_diff), '%m/%d') + " at "+time
+    if len(time)>0:
+        return datetime.strftime(datetime.now() - timedelta(day_diff), '%m/%d') + " at "+time
+    else:
+        return datetime.strftime(datetime.now() - timedelta(day_diff), '%m/%d')
     #date.today()
     
-    '''est = timezone('EST')
-    date = str(datetime.now(est)).split()[0].split("-")
-    date="_".join(date)
-    return date
-    
-    est = timezone('EST')
-    return datetime.now(est)
 
-
-    #weekday_int=(datetime.datetime.today().weekday())
-    #days_ago=math.abs(weekday_int-gameday_int)'''
 
 #print(date_format("Last Thursday at 7:00 PM"))
 
 
+
+
+
 '''
+CODE PREP OUTLINE
+
 
 difference in days  = curr_num - date_num
 differenc in seconds = 3*3600*24
