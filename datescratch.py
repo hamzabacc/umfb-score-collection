@@ -33,6 +33,8 @@ def date_format(date):
         if "Today" in date:
             day_diff=0
         
+    if 'Yesterday' not in date and "Today" not in date and 'Last' not in date:
+        return date
     if len(time)>0:
         return datetime.strftime(datetime.now() - timedelta(day_diff), '%m/%d') + " at "+time
     else:
@@ -42,7 +44,7 @@ def date_format(date):
 
 
 #print(date_format("Last Thursday at 7:00 PM"))
-
+#print(date_format('Aug 29 \'19'))
 
 
 
