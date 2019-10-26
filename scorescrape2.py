@@ -13,11 +13,11 @@ import datescratch
 
 
 def getScoreStream(url, sportKey=""):
-    if url[-6:] != '/games':
-        url+="/games"
+    #if url[-6:] != '/games':
+    #   url+="/games"
     path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     driver = webdriver.Chrome(executable_path = path)
-    driver.get(url)
+    driver.get(url+"/games")
 
     html=driver.page_source
     soup = BeautifulSoup(html, "html.parser")
@@ -173,4 +173,5 @@ def getFullSchoolName(url, sportKey=""):
         scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
         a_tags=scroll_container.find_all('a')
     TEAM_NAME=str(soup.find('h1').text)
+    driver.close()
     return TEAM_NAME
