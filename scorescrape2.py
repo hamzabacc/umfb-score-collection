@@ -13,6 +13,8 @@ import datescratch
 
 
 def getScoreStream(url, sportKey=""):
+    if url[-6:] != '/games':
+        url+="/games"
     path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
     driver = webdriver.Chrome(executable_path = path)
     driver.get(url)
@@ -81,13 +83,15 @@ def getScoreStream(url, sportKey=""):
     if ("\'18" in date and "\'19" not in date):
         return TEAM_NAME+","+state+','+"N/A"+",no recent football scores available,"
 
+    if 'Last' not in date and 'Yesterday' not in date and 'Today' not in date and football_game:
+        return TEAM_NAME+","+state+','+"N/A"+",most recent score isn't from this week"
+
     if cancelled:
         if(TEAM_NAME==(away_team)):
             return TEAM_NAME+','+state+','+'@'+home_team+","+'Cancelled,'+datescratch.date_format(date)+','
         else: return TEAM_NAME+','+state+','+'vs. '+away_team+','+'Cancelled,'+datescratch.date_format(date)+','
 
-    if 'Last' not in date and 'Yesterday' not in date and 'Today' not in date and football_game:
-        return TEAM_NAME+","+state+','+"N/A"+",most recent score isn't from this week"
+
 
 
     if(len(ints)>2):
@@ -130,9 +134,43 @@ def getScoreStream(url, sportKey=""):
     
     return RESULT
     
-
+#print(getScoreStream('https://scorestream.com/team/our-lady-of-good-counsel-high-school-falcons-242415/games','Boys Varsity Football'))
 #BE SURE TO ADD /games TO TESTING URLS!
 #print(getScoreStream('https://scorestream.com/team/bergen-catholic-high-school-crusaders-243975/games','Boys Varsity Football'))  
 #print(getScoreStream('https://scorestream.com/team/miami-central-senior-high-school-rockets-4021/games', 'Boys Varsity Football'))
 #print(getScoreStream('https://scorestream.com/team/pinnacle-high-school-pioneers-1156/games','Boys Varsity Football'))
 #print(getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678/games', 'Boys Varsity Football'))
+
+
+def getFullSchoolName(url, sportKey=""):
+    path=r'C:\Users\Hamza\Documents\Football\chromedriver.exe'
+    driver = webdriver.Chrome(executable_path = path)
+    driver.get(url)
+
+    html=driver.page_source
+    soup = BeautifulSoup(html, "html.parser")
+
+
+    '''
+    CODE TO OBTAIN SCROLL CONTAINER + TAGS
+    '''
+
+    span_city_state=soup.find('span', attrs={'itemprop':'address'})
+    city_state=span_city_state.text
+    state=city_state[len(city_state)-2:]
+
+    
+    scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
+    try:
+        a_tags=scroll_container.find_all('a')
+    except:
+        time.sleep(5)
+        html=driver.page_source
+        soup = BeautifulSoup(html, "html.parser")
+        span_city_state=soup.find('span', attrs={'itemprop':'address'})
+        city_state=span_city_state.text
+        state=city_state[len(city_state)-2:]
+        scroll_container=soup.find('div', attrs={'class':'ReactVirtualized__Grid__innerScrollContainer'})
+        a_tags=scroll_container.find_all('a')
+    TEAM_NAME=str(soup.find('h1').text)
+    return TEAM_NAME
