@@ -84,7 +84,7 @@ def getScoreStream(url, sportKey=""):
         return TEAM_NAME+","+state+','+"N/A"+",no recent football scores available,"
 
     if 'Last' not in date and 'Yesterday' not in date and 'Today' not in date and football_game:
-        return TEAM_NAME+","+state+','+"N/A"+",most recent score isn't from this week"
+        return TEAM_NAME+","+state+','+"N/A"+",no score from this week"
 
     if cancelled:
         if(TEAM_NAME==(away_team)):
