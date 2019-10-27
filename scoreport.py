@@ -1,5 +1,5 @@
 import scorescrape2
-print(scorescrape2.getScoreStream('https://scorestream.com/team/pioneer-high-school-pioneers-8385'))
+#print(scorescrape2.getScoreStream('https://scorestream.com/team/st-louis-school-crusaders-242678'))
 
 def update_checklist(date):
     date_csv_read = open(date+"_checklist.csv", "r")
@@ -9,16 +9,23 @@ def update_checklist(date):
     date_csv.write("school name, state, done?, data, scorestream url\n")
     team_info_pairs = {}
     for line in data[1:]:
-        school_is_complete = line[2]
-        if school_is_complete=="Y":
-            date_csv.write(line)
-            continue
-        url = line[4][:-2]
-        return url
-        info = scorescrape2.getScoreStream(url)
-        final_score = info.split(",")[4]
-        if final_score.startswith("L ") or final_score.startwith("W "):
-            date_csv.write([line[0],line[1],'Y',info,url].join(','))
+        #school_is_complete = line.split('\t')[2]
+        url = line.split(',')[4]
+        school_name = line.split(',')[0]
+        school_state = line.split(',')[1]
+        info = scorescrape2.getScoreStream(url, "Varsity Football")
+        info_non_csv = "***".join(info.split(','))
+        #.split('\t')[3]
+        try:
+            final_score = info_non_csv.split("***")[3]
+            #if final_score.startswith("L ") or final_score.startwith("W "):
+            if "L " in final_score or "W " in final_score:
+                date_csv.write(",".join([school_name,school_state,'Y',info_non_csv,url]))
+            else:
+                date_csv.write(",".join([school_name,school_state,'N',info_non_csv,url]))
+        except:
+            date_csv.write(",".join([school_name, school_state, 'N', info_non_csv, url]))
+    date_csv.close()
     return None
 
 
@@ -45,5 +52,5 @@ def date_checklist_creator(date):
         else:'''
     return None
 
-
-#print(date_checklist_creator("october 26"))
+#date_check
+print(update_checklist("october 26"))
